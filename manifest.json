@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Summarizer with Gemini",
+  "version": "1.4",
+  "description": "Summarize YouTube videos using Google Gemini",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "identity"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*", 
+    "https://generativelanguage.googleapis.com/"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["*://www.youtube.com/watch?v=*"], 
+      "run_at": "document_idle"
+    }
+  ],
+  "oauth2": {
+    "client_id": "194845147383-sqep3dkv3u7va80hrambho039hcv7rlf.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/generative-language.retriever",
+      "https://www.googleapis.com/auth/generative-language.tuning"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
